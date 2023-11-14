@@ -22,8 +22,13 @@ class UserController extends Controller
         $timeStart = microtime(true);
         $response = Http::get('https://randomuser.me/api', [
             'results' => '5000'
-        ])->json();
+        ]);
 
+        if($response->failed()){
+            return 'Ошибка запроса к https://randomuser.me/api';
+        }
+
+        $response = $response->json();
 
         foreach($response['results'] as $value) {
 
@@ -59,12 +64,11 @@ class UserController extends Controller
 
         $time = microtime(true) - $timeStart;
 
-        echo "Всего=$allUser, Добавлено=$addedUser, Обновлено=$updatedUser ,  Затраты времени=$time";
-
-
+        return "Всего=$allUser, Добавлено=$addedUser, Обновлено=$updatedUser ,  Затраты времени=$time";
 
 
     }
+
 
 
 

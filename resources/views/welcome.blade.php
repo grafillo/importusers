@@ -7,7 +7,7 @@
 
 
 <button type="button" id="get">импортировать пользователей</button>
-<div id="result"></div>
+<div id="result">Всего=0, Добавлено=0, Обновлено=0 ,  Затраты времени=0</div>
 <script>
     function getData() {
 
@@ -16,7 +16,7 @@
         xhr.open('GET', requestURL);
         xhr.onload = () => {
             if (xhr.status !== 200) {
-                return;
+                return document.querySelector('#result').innerHTML = 'Неизвестная ошибка';
             }
             document.querySelector('#result').innerHTML = xhr.response;
         }
